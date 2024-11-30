@@ -6,24 +6,24 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/yapic_io-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/yapic_io-{{ version }}.tar.gz
   sha256: d8d3b99f75d737c158c6af8e230bb31b15f0d79f53a647e704c41ac5b6b697a5
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - h5py
     - matplotlib-base
     - munkres >=1.0.8
     - numpy >=1.13.1
-    - python >=3.6
+    - python >={{ python_min }}
     - scikit-image >=0.12.3
     - sparse >=0.12.0
     - tifffile
@@ -36,6 +36,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/yapic-io/
